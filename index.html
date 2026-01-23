@@ -3,337 +3,360 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grupo Liqui | Expertos en Protección Contra Incendios - Bucaramanga</title>
-  <meta name="description" content="Líderes en recarga, mantenimiento e inspección certificada de extintores en Bucaramanga. Seguridad garantizada para empresas e industrias."/>
+  <title>Grupo Liqui | Protección Contra Incendios | Bucaramanga</title>
+  <meta name="description" content="Expertos certificados en recarga, mantenimiento e inspección de extintores en Bucaramanga. Seguridad profesional para tu empresa."/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
+      --azul-deep: #001233;
+      --azul: #0a3d8c;
+      --rojo-fuego: #ff2d00;
+      --rojo-glow: #ff4d4d;
       --blanco: #ffffff;
-      --azul-deep: #0a1f44;
-      --azul: #0d47a1;
-      --rojo-fuego: #ff3d00;
-      --rojo-glow: #ff5252;
-      --rojo-oscuro: #d32f2f;
-      --gris-oscuro: #0f0f0f;
-      --sombra-fuego: 0 15px 40px rgba(255,61,0,0.25);
-      --transicion: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      --gris-claro: #f8f9fa;
+      --sombra: 0 15px 40px rgba(255,45,0,0.18);
+      --trans: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    
+
     body {
       font-family: 'Inter', sans-serif;
       color: #111;
       background: var(--blanco);
+      line-height: 1.7;
       overflow-x: hidden;
     }
-    
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 800; }
-    
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
-    
-    /* Hero Premium con llamas animadas */
-    header {
-      position: relative;
-      height: 100vh;
-      min-height: 800px;
-      background: linear-gradient(160deg, var(--azul-deep) 0%, #001845 100%);
+
+    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 900; }
+
+    /* Navbar fijo premium */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0,18,51,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      padding: 1.2rem 5%;
+      transition: var(--trans);
+    }
+
+    nav.scrolled { background: rgba(0,18,51,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: var(--rojo-fuego);
+      font-size: 2.1rem;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
       color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      position: relative;
+      transition: var(--trans);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 3px;
+      bottom: -6px; left: 0;
+      background: var(--rojo-fuego);
+      transition: width 0.4s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hero candela pro */
+    #hero {
+      height: 100vh;
+      min-height: 820px;
+      background: linear-gradient(135deg, #000c26 0%, #001845 100%);
+      position: relative;
       display: flex;
       align-items: center;
+      color: white;
       overflow: hidden;
     }
-    
-    header::before {
+
+    #hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background: url('https://images.unsplash.com/photo-1563299796-17596ed6b017?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90') center/cover;
-      opacity: 0.12;
+      opacity: 0.10;
       mix-blend-mode: screen;
     }
-    
-    .flame-overlay {
+
+    .flames-bg {
       position: absolute;
       inset: 0;
+      background: radial-gradient(circle at 15% 85%, rgba(255,45,0,0.22) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 25%, rgba(255,77,77,0.18) 0%, transparent 55%);
+      animation: fireBreath 16s ease-in-out infinite alternate;
       pointer-events: none;
-      background: radial-gradient(circle at 20% 80%, rgba(255,61,0,0.18) 0%, transparent 40%),
-                  radial-gradient(circle at 80% 20%, rgba(255,82,82,0.14) 0%, transparent 50%);
-      animation: flameBreath 14s ease-in-out infinite alternate;
     }
-    
-    @keyframes flameBreath {
-      0%   { transform: scale(1) translate(0,0); opacity: 0.7; }
-      50%  { transform: scale(1.08) translate(5%, -3%); opacity: 0.9; }
-      100% { transform: scale(1.03) translate(-4%, 6%); opacity: 0.75; }
+
+    @keyframes fireBreath {
+      0%   { transform: scale(1.02) translate(0,0); opacity: 0.75; }
+      100% { transform: scale(1.12) translate(6%, -4%); opacity: 0.92; }
     }
-    
-    .hero-content {
+
+    .hero-inner {
       position: relative;
-      z-index: 3;
-      text-align: center;
-      max-width: 1100px;
+      z-index: 2;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 5%;
+      text-align: center;
     }
-    
-    .hero-content h1 {
-      font-size: clamp(4.5rem, 12vw, 9rem);
-      line-height: 0.95;
+
+    .hero-inner h1 {
+      font-size: clamp(5rem, 14vw, 10rem);
+      line-height: 0.92;
       margin-bottom: 1.5rem;
       color: var(--rojo-fuego);
-      text-shadow: 0 8px 40px rgba(255,61,0,0.5);
-      letter-spacing: -2px;
+      text-shadow: 0 10px 50px rgba(255,45,0,0.6);
     }
-    
-    .hero-content .subtitle {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
+
+    .hero-subtitle {
+      font-size: clamp(1.8rem, 5vw, 3rem);
       font-weight: 400;
-      opacity: 0.92;
-      margin-bottom: 3rem;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      opacity: 0.95;
     }
-    
-    .btn-premium {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
+
+    .btn-hero {
       background: var(--rojo-fuego);
       color: white;
-      padding: 18px 48px;
+      padding: 18px 50px;
       border-radius: 60px;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       text-decoration: none;
-      overflow: hidden;
-      transition: var(--transicion);
-      box-shadow: var(--sombra-fuego);
-      margin: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 40px rgba(255,45,0,0.4);
+      transition: var(--trans);
+      margin: 12px;
     }
-    
-    .btn-premium:hover {
-      transform: translateY(-8px) scale(1.06);
-      box-shadow: 0 25px 60px rgba(255,61,0,0.45);
+
+    .btn-hero:hover {
+      transform: translateY(-10px) scale(1.08);
+      box-shadow: 0 25px 70px rgba(255,45,0,0.55);
+      background: #ff4d00;
     }
-    
-    .btn-premium::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 300%; height: 300%;
-      background: radial-gradient(circle, rgba(255,255,255,0.25) 10%, transparent 40%);
-      transform: translate(-50%, -50%) scale(0);
-      transition: transform 0.6s;
-      border-radius: 50%;
-    }
-    
-    .btn-premium:hover::before { transform: translate(-50%, -50%) scale(1); }
-    
+
     .btn-outline {
-      background: transparent;
       border: 3px solid white;
-      color: white;
+      background: transparent;
     }
-    
-    .btn-outline:hover { background: rgba(255,255,255,0.12); }
-    
-    /* Secciones */
-    section { padding: 140px 0; }
-    
+
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* Secciones abajo */
+    section { padding: 140px 5%; }
+
+    .container { max-width: 1400px; margin: 0 auto; }
+
     .section-title {
       text-align: center;
-      font-size: 4.2rem;
+      font-size: 4.5rem;
       color: var(--azul-deep);
       margin-bottom: 5rem;
       position: relative;
     }
-    
+
     .section-title::after {
       content: '';
-      width: 140px;
+      width: 160px;
       height: 8px;
-      background: linear-gradient(90deg, var(--rojo-fuego), var(--rojo-glow));
+      background: var(--rojo-fuego);
       position: absolute;
       bottom: -25px;
       left: 50%;
       transform: translateX(-50%);
       border-radius: 4px;
     }
-    
-    /* Servicios premium */
-    .servicios-grid {
+
+    /* Servicios grid premium */
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       gap: 40px;
     }
-    
-    .card-premium {
+
+    .service-card {
       background: white;
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      transition: var(--transicion);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      transition: var(--trans);
       position: relative;
-      border: 1px solid rgba(255,61,0,0.08);
     }
-    
-    .card-premium:hover {
+
+    .service-card:hover {
       transform: translateY(-20px);
-      box-shadow: 0 40px 100px rgba(255,61,0,0.22);
+      box-shadow: var(--sombra);
     }
-    
-    .card-premium::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent, rgba(255,61,0,0.06));
-      opacity: 0;
-      transition: opacity 0.6s;
+
+    .service-img {
+      height: 260px;
+      background-size: cover;
+      background-position: center;
     }
-    
-    .card-premium:hover::before { opacity: 1; }
-    
-    .card-icon {
-      font-size: 5rem;
-      color: var(--rojo-fuego);
-      margin: 2.5rem 0 1.5rem;
-      transition: var(--transicion);
-    }
-    
-    .card-premium:hover .card-icon {
-      transform: scale(1.15);
-      color: var(--rojo-glow);
-    }
-    
-    .card-content {
-      padding: 0 3rem 3.5rem;
+
+    .service-content {
+      padding: 2.5rem;
       text-align: center;
     }
-    
-    .card-content h3 {
-      font-size: 2.2rem;
+
+    .service-content h3 {
+      font-size: 2.4rem;
       color: var(--azul-deep);
       margin-bottom: 1.2rem;
     }
-    
-    /* Contacto premium */
+
+    /* Contacto */
     #contacto {
-      background: linear-gradient(145deg, var(--azul-deep) 0%, #0b2d6e 100%);
+      background: linear-gradient(145deg, var(--azul-deep), #001f5c);
       color: white;
     }
-    
+
     #contacto .section-title { color: white; }
-    
+
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 50px;
       text-align: center;
     }
-    
-    .contact-item {
-      transition: var(--transicion);
-    }
-    
-    .contact-item:hover { transform: translateY(-12px); }
-    
+
     .contact-item i {
-      font-size: 4.5rem;
+      font-size: 4.8rem;
       color: var(--rojo-fuego);
       margin-bottom: 1.5rem;
-      transition: var(--transicion);
+      transition: var(--trans);
     }
-    
-    .contact-item:hover i { color: var(--rojo-glow); transform: scale(1.15); }
-    
+
+    .contact-item:hover i { transform: scale(1.2); color: var(--rojo-glow); }
+
     .contact-item a {
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       text-decoration: none;
       font-weight: 500;
     }
-    
+
     /* Footer */
     footer {
-      background: var(--gris-oscuro);
-      color: #aaa;
+      background: var(--azul-deep);
+      color: #ccc;
       text-align: center;
-      padding: 80px 5% 50px;
+      padding: 80px 5% 40px;
     }
-    
-    footer a { color: var(--rojo-fuego); text-decoration: none; margin: 0 20px; }
-    
+
     @media (max-width: 900px) {
-      .hero-content h1 { font-size: 5.5rem; }
-      section { padding: 100px 0; }
-      .section-title { font-size: 3.2rem; }
+      .hero-inner h1 { font-size: 6rem; }
+      .section-title { font-size: 3.4rem; }
+      nav { padding: 1rem 5%; }
     }
   </style>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <header>
-    <div class="flame-overlay"></div>
-    <div class="container">
-      <div class="hero-content">
-        <h1>GRUPO LIQUI</h1>
-        <div class="subtitle">Seguridad Contra Incendios de Alto Nivel</div>
-        <p style="font-size:1.5rem; max-width:900px; margin:0 auto 3.5rem; opacity:0.9;">
-          Recarga certificada • Mantenimiento especializado • Inspección y sellado normativo<br>
-          Protección confiable para industrias, empresas y copropiedades en Bucaramanga
-        </p>
-        
-        <a href="#contacto" class="btn-premium">Cotización Inmediata</a>
-        <a href="https://wa.me/573001234567?text=Hola%20Grupo%20Liqui%2C%20quiero%20cotizar%20servicio..." class="btn-premium btn-outline">
-          <i class="fab fa-whatsapp" style="margin-right:14px; font-size:1.6rem;"></i> WhatsApp 24/7
-        </a>
-      </div>
+  <!-- NAVEGACIÓN FIJA -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">GRUPO LIQUI</a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#politicas">Políticas</a></li>
+        <li><a href="#terminos">Términos</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
+  <!-- HERO CON CANDELA PRO -->
+  <section id="hero">
+    <div class="flames-bg"></div>
+    <div class="hero-inner">
+      <h1>GRUPO LIQUI</h1>
+      <div class="hero-subtitle">Protección Contra Incendios de Alto Estándar</div>
+      <p style="font-size:1.6rem; max-width:880px; margin:0 auto 3.5rem; opacity:0.92;">
+        Recarga certificada • Mantenimiento especializado • Inspección anual obligatoria<br>
+        Seguridad confiable para industrias, empresas y copropiedades en Bucaramanga
+      </p>
+      <a href="#contacto" class="btn-hero">Solicitar Cotización</a>
+      <a href="https://wa.me/573001234567?text=Hola%20Grupo%20Liqui..." class="btn-hero btn-outline">
+        <i class="fab fa-whatsapp"></i> WhatsApp Ahora
+      </a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
   <section id="servicios">
     <div class="container">
-      <h2 class="section-title">Soluciones Profesionales</h2>
-      
-      <div class="servicios-grid">
-        <div class="card-premium">
-          <i class="fas fa-fire-extinguisher card-icon"></i>
-          <div class="card-content">
-            <h3>Recarga Certificada</h3>
-            <p>Todo tipo de extintores (ABC, CO₂, polvo químico, agua, espuma). Agentes extintores premium con trazabilidad y garantía.</p>
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('https://resources.impactfireservices.com/hubfs/fire%20extinguishers.jpg');"></div>
+          <div class="service-content">
+            <h3>Recarga Profesional</h3>
+            <p>Recarga de extintores ABC, CO₂, polvo químico, agua y espuma con agentes de máxima calidad y trazabilidad completa.</p>
           </div>
         </div>
-        
-        <div class="card-premium">
-          <i class="fas fa-tools card-icon"></i>
-          <div class="card-content">
+
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('https://firetron.com/wp-content/uploads/Professional-Fire-Extinguisher-Inspection-1-1024x576.webp');"></div>
+          <div class="service-content">
             <h3>Mantenimiento Integral</h3>
-            <p>Pruebas hidrostáticas, cambio de válvulas/mangueras/sellos, calibración y cumplimiento RETIE – NTC – Res. 90708.</p>
+            <p>Pruebas hidrostáticas, reemplazo de componentes, calibración y cumplimiento total de normas RETIE y NTC.</p>
           </div>
         </div>
-        
-        <div class="card-premium">
-          <i class="fas fa-certificate card-icon"></i>
-          <div class="card-content">
-            <h3>Inspección & Certificación</h3>
-            <p>Verificación anual obligatoria con entrega de certificados digitales y sellos de vigencia. Reportes detallados para auditorías.</p>
+
+        <div class="service-card">
+          <div class="service-img" style="background-image: url('https://www.ul.com/sites/default/files/styles/hero_boxed_width/public/2019-04/GettyImages-171247457-Hero-1000x715.jpg?itok=GOBqU6rI');"></div>
+          <div class="service-content">
+            <h3>Inspección y Certificación</h3>
+            <p>Verificación anual con entrega de certificados digitales, sellos de vigencia y reportes para auditorías.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACTO -->
   <section id="contacto">
     <div class="container">
-      <h2 class="section-title">Estamos Listos para Protegerte</h2>
-      <p style="text-align:center; font-size:1.6rem; max-width:900px; margin:0 auto 5rem; opacity:0.9;">
-        Respuesta inmediata • Visitas programadas en 24-48 h • Cobertura total en Bucaramanga y área metropolitana
-      </p>
-      
+      <h2 class="section-title">Contáctanos Hoy</h2>
       <div class="contact-grid">
         <div class="contact-item">
           <i class="fab fa-whatsapp"></i>
@@ -344,28 +367,34 @@
           <p><a href="tel:+5771234567">(7) 123 4567</a></p>
         </div>
         <div class="contact-item">
-          <i class="fas fa-envelope-open-text"></i>
+          <i class="fas fa-envelope"></i>
           <p><a href="mailto:info@grupoliqui.com">info@grupoliqui.com</a></p>
         </div>
         <div class="contact-item">
           <i class="fas fa-map-marker-alt"></i>
-          <p>Bucaramanga – Santander</p>
+          <p>Bucaramanga, Santander</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>© 2026 GRUPO LIQUI — Seguridad que nunca falla</p>
-      <p style="margin:1.8rem 0;">
-        <a href="#politicas">Políticas de Privacidad</a> • 
-        <a href="#terminos">Términos y Condiciones</a>
+      <p>© 2026 GRUPO LIQUI — Todos los derechos reservados</p>
+      <p style="margin-top:1.5rem;">
+        <a href="#politicas" style="color:var(--rojo-fuego);">Políticas de Privacidad</a> • 
+        <a href="#terminos" style="color:var(--rojo-fuego);">Términos y Condiciones</a>
       </p>
     </div>
   </footer>
 
-  <!-- Mantén los modales de políticas/términos del código anterior si los quieres -->
+  <script>
+    // Efecto scroll en navbar
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
+    });
+  </script>
 
 </body>
 </html>
