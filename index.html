@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grupo Liqui | Seguridad Industrial Extintores - Bucaramanga</title>
-  <meta name="description" content="Recarga, mantenimiento e inspección de extintores en Bucaramanga. Servicio rápido y certificado."/>
+  <title>Recarga y Mantenimiento de Extintores | Bucaramanga</title>
+  <meta name="description" content="Servicio profesional de recarga, mantenimiento e inspección de extintores en Bucaramanga. Rápido y certificado."/>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,9 @@
       --amarillo-fuerte: #ffcc00;
       --negro: #000000;
       --gris-oscuro: #111111;
+      --gris-muy-oscuro: #0a0a0a;
       --blanco: #ffffff;
-      --sombra: 0 10px 30px rgba(255,215,0,0.3);
+      --sombra: 0 10px 30px rgba(255,215,0,0.25);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -31,38 +32,39 @@
 
     h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
 
-    /* Partículas amarillas flotantes */
-    #particles {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+    /* Partículas solo en hero y footer */
+    .particles {
+      position: absolute;
+      inset: 0;
       pointer-events: none;
-      z-index: 1;
-      background: transparent;
+      overflow: hidden;
     }
 
     .particle {
       position: absolute;
       background: var(--amarillo);
       border-radius: 50%;
-      opacity: 0.6;
-      animation: float 15s infinite linear;
+      opacity: 0;
+      animation: spark 12s infinite linear;
+      box-shadow: 0 0 8px var(--amarillo);
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) scale(0.2); opacity: 0; }
-      20% { opacity: 0.8; }
-      80% { opacity: 0.6; }
-      100% { transform: translateY(-20vh) scale(0.1); opacity: 0; }
+    @keyframes spark {
+      0%   { transform: translateY(120%) scale(0.1); opacity: 0; }
+      10%  { opacity: 0.9; }
+      90%  { opacity: 0.7; }
+      100% { transform: translateY(-30%) scale(0.15); opacity: 0; }
     }
 
     /* Navbar */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(12px);
       z-index: 100;
       padding: 1.2rem 6%;
+      border-bottom: 1px solid rgba(255,215,0,0.15);
     }
 
     .nav-container {
@@ -75,32 +77,33 @@
 
     .logo {
       color: var(--amarillo);
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       font-weight: 800;
       text-decoration: none;
+      text-shadow: 0 0 15px rgba(255,215,0,0.5);
     }
 
     .nav-links {
       display: flex;
-      gap: 3rem;
+      gap: 2.8rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--blanco);
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
       transition: color 0.4s;
     }
 
     .nav-links a:hover { color: var(--amarillo); }
 
-    /* Hero */
+    /* Hero - solo partículas aquí */
     #hero {
       height: 100vh;
       min-height: 800px;
-      background: linear-gradient(135deg, var(--negro) 0%, #1a1a1a 100%);
+      background: linear-gradient(160deg, var(--negro) 0%, #0f0f0f 100%);
       position: relative;
       display: flex;
       align-items: center;
@@ -109,30 +112,34 @@
       overflow: hidden;
     }
 
+    #hero .particles { z-index: 1; }
+
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 1100px;
       padding: 0 5%;
     }
 
-    .hero-content h1 {
-      font-size: clamp(6rem, 15vw, 12rem);
+    .hero-content .main-title {
+      font-size: clamp(7rem, 16vw, 13rem);
       color: var(--amarillo);
-      margin-bottom: 1rem;
-      text-shadow: 0 0 30px rgba(255,215,0,0.7);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 40px rgba(255,215,0,0.7);
+      line-height: 0.9;
     }
 
     .hero-subtitle {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 600;
       margin-bottom: 2.5rem;
+      opacity: 0.95;
     }
 
     .btn {
       background: var(--amarillo);
       color: var(--negro);
-      padding: 18px 50px;
+      padding: 18px 48px;
       border-radius: 50px;
       font-size: 1.5rem;
       font-weight: 800;
@@ -140,23 +147,29 @@
       display: inline-block;
       box-shadow: var(--sombra);
       transition: all 0.4s;
-      margin: 15px;
+      margin: 12px;
     }
 
     .btn:hover {
-      transform: translateY(-8px) scale(1.1);
-      box-shadow: 0 20px 60px rgba(255,215,0,0.6);
+      transform: translateY(-10px) scale(1.08);
+      box-shadow: 0 25px 70px rgba(255,215,0,0.55);
       background: var(--amarillo-fuerte);
     }
 
-    /* Secciones */
-    section { padding: 120px 6%; position: relative; z-index: 2; }
+    /* Secciones intermedias en gris oscuro */
+    section:not(#hero):not(#contacto):not(footer) {
+      background: var(--gris-oscuro);
+      padding: 120px 6%;
+      position: relative;
+      z-index: 2;
+    }
 
     .section-title {
       text-align: center;
-      font-size: 5rem;
+      font-size: 5.5rem;
       color: var(--amarillo);
       margin-bottom: 4rem;
+      text-shadow: 0 0 20px rgba(255,215,0,0.4);
     }
 
     .services-grid {
@@ -168,8 +181,8 @@
     }
 
     .card {
-      background: rgba(30,30,30,0.9);
-      border: 2px solid var(--amarillo);
+      background: rgba(20,20,20,0.95);
+      border: 2px solid rgba(255,215,0,0.3);
       border-radius: 20px;
       overflow: hidden;
       transition: all 0.5s;
@@ -179,8 +192,8 @@
 
     .card:hover {
       transform: translateY(-15px);
+      border-color: var(--amarillo);
       box-shadow: var(--sombra);
-      border-color: var(--amarillo-fuerte);
     }
 
     .card img {
@@ -191,14 +204,15 @@
     }
 
     .card h3 {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       color: var(--amarillo);
       margin: 1.5rem 0 1rem;
     }
 
-    /* Contacto */
+    /* Contacto también en gris */
     #contacto {
-      background: linear-gradient(135deg, #111, #000);
+      background: var(--gris-oscuro);
+      padding: 120px 6%;
     }
 
     .contact-grid {
@@ -211,29 +225,41 @@
     }
 
     .contact-item i {
-      font-size: 5rem;
+      font-size: 5.5rem;
       color: var(--amarillo);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 15px rgba(255,215,0,0.5);
     }
 
     .contact-item a {
       color: var(--blanco);
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       text-decoration: none;
     }
 
     .contact-item a:hover { color: var(--amarillo); }
 
+    /* Footer con partículas */
     footer {
       background: var(--negro);
       text-align: center;
-      padding: 60px 6%;
-      border-top: 2px solid var(--amarillo);
+      padding: 100px 6% 60px;
+      position: relative;
+      border-top: 3px solid rgba(255,215,0,0.3);
+    }
+
+    footer .particles { z-index: 1; }
+
+    footer p {
+      position: relative;
+      z-index: 3;
+      font-size: 1.3rem;
+      opacity: 0.9;
     }
 
     @media (max-width: 768px) {
-      .hero-content h1 { font-size: 5rem; }
-      .section-title { font-size: 3.5rem; }
+      .hero-content .main-title { font-size: 6rem; }
+      .section-title { font-size: 4rem; }
       .nav-links { gap: 1.5rem; font-size: 1rem; }
     }
   </style>
@@ -241,9 +267,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-  <!-- Partículas amarillas -->
-  <div id="particles"></div>
 
   <!-- Navbar -->
   <nav>
@@ -258,47 +281,48 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero - partículas solo aquí -->
   <section id="hero">
+    <div class="particles" id="hero-particles"></div>
     <div class="hero-content">
-      <h1>GRUPO LIQUI</h1>
-      <div class="hero-subtitle">¡Alerta Máxima! Protección Contra Incendios</div>
-      <p style="font-size:1.8rem; max-width:900px; margin:0 auto 3rem;">
-        Recarga • Mantenimiento • Certificación de Extintores en Bucaramanga<br>
-        Servicio rápido, certificado y con energía amarilla
+      <div class="main-title">PROTECCIÓN</div>
+      <div class="hero-subtitle">Contra Incendios – Nivel Máximo</div>
+      <p style="font-size:1.9rem; max-width:950px; margin:0 auto 3.5rem; opacity:0.92;">
+        Recarga certificada • Mantenimiento especializado • Inspección y sellado normativo<br>
+        Cobertura total en Bucaramanga y área metropolitana
       </p>
-      <a href="#contacto" class="btn">Cotiza Ahora</a>
-      <a href="https://wa.me/573001234567?text=Hola%20Grupo%20Liqui..." class="btn" style="background:#111;color:var(--amarillo);border:2px solid var(--amarillo);">
-        <i class="fab fa-whatsapp"></i> WhatsApp
+      <a href="#contacto" class="btn">Solicitar Cotización</a>
+      <a href="https://wa.me/573001234567?text=Hola%20quiero%20cotizar..." class="btn" style="background:transparent; color:var(--amarillo); border:3px solid var(--amarillo);">
+        <i class="fab fa-whatsapp" style="margin-right:12px;"></i> WhatsApp
       </a>
     </div>
   </section>
 
   <!-- Servicios -->
   <section id="servicios">
-    <h2 class="section-title">Servicios de Alto Impacto</h2>
+    <h2 class="section-title">Nuestros Servicios</h2>
     <div class="services-grid">
       <div class="card">
-        <img src="https://fire-risk-assessment-network.com/blog/wp-content/uploads/2019/11/Fire-Extinguishers.png" alt="Recarga extintores">
-        <h3>Recarga Rápida</h3>
-        <p>ABC, CO₂, polvo, agua. Agentes premium y garantía total.</p>
+        <img src="https://fire-risk-assessment-network.com/blog/wp-content/uploads/2019/11/Fire-Extinguishers.png" alt="Recarga">
+        <h3>Recarga Profesional</h3>
+        <p>ABC, CO₂, polvo químico, agua y espuma – agentes de máxima calidad.</p>
       </div>
       <div class="card">
         <img src="https://media.gettyimages.com/id/1783069832/photo/firefighters-team-working.jpg?s=612x612&w=gi&k=20&c=uqdpkwlWeRroJl9ZKPcV9veQ-CwwYTlLFt9hlUAS-ZQ=" alt="Mantenimiento">
-        <h3>Mantenimiento Pro</h3>
-        <p>Pruebas, cambios y cumplimiento RETIE al 100%.</p>
+        <h3>Mantenimiento Integral</h3>
+        <p>Pruebas hidrostáticas, reemplazo de piezas y cumplimiento RETIE/NTC.</p>
       </div>
       <div class="card">
         <img src="https://thumbs.dreamstime.com/b/red-fire-extinguisher-black-background-safety-text-against-featuring-prominent-yellow-reading-cylindrical-403263438.jpg" alt="Certificación">
-        <h3>Inspección & Certificado</h3>
-        <p>Sellos vigentes, reportes digitales para tu empresa.</p>
+        <h3>Inspección y Certificación</h3>
+        <p>Sellos vigentes, certificados digitales y reportes para auditorías.</p>
       </div>
     </div>
   </section>
 
   <!-- Contacto -->
   <section id="contacto">
-    <h2 class="section-title">Contáctanos Ya</h2>
+    <h2 class="section-title">Contáctanos Inmediatamente</h2>
     <div class="contact-grid">
       <div class="contact-item">
         <i class="fab fa-whatsapp"></i>
@@ -314,29 +338,42 @@
       </div>
       <div class="contact-item">
         <i class="fas fa-map-marker-alt"></i>
-        <p>Bucaramanga - Santander</p>
+        <p>Bucaramanga – Santander</p>
       </div>
     </div>
   </section>
 
+  <!-- Footer con partículas -->
   <footer>
-    <p>© 2026 GRUPO LIQUI - Energía Amarilla, Seguridad Negra</p>
+    <div class="particles" id="footer-particles"></div>
+    <p>© 2026 – Todos los derechos reservados</p>
+    <p style="margin-top:1.5rem; font-size:1.1rem;">
+      Servicio técnico certificado • Energía amarilla, seguridad total
+    </p>
   </footer>
 
   <script>
-    // Generar partículas amarillas
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 80; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      const size = Math.random() * 6 + 2;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDelay = `${Math.random() * 15}s`;
-      particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-      particlesContainer.appendChild(particle);
+    // Función para crear partículas
+    function createParticles(containerId, count = 60) {
+      const container = document.getElementById(containerId);
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 5 + 2;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.animationDelay = `${Math.random() * 12}s`;
+        p.style.animationDuration = `${Math.random() * 8 + 10}s`;
+        container.appendChild(p);
+      }
     }
+
+    // Partículas en hero
+    createParticles('hero-particles', 70);
+
+    // Partículas en footer (menos cantidad para no sobrecargar)
+    createParticles('footer-particles', 40);
   </script>
 
 </body>
